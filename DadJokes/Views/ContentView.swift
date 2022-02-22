@@ -1,10 +1,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+//MARK: Stored proprotys
+    @State var currentJoke: DadJoke = DadJoke(id: "", joke: "Knock Knock", status: 0)
+    
+    
+    //MARK: Computed proprotys
+    
     var body: some View {
         VStack {
             
-            Text("How do you organize a space party? You planet.")
+            Text(currentJoke.joke)
                 .multilineTextAlignment(.leading)
                 .padding(30)
                 .overlay(
