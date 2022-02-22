@@ -52,6 +52,42 @@ struct ContentView: View {
             Spacer()
                         
         }
+       //when the app opens, get a new joke from the webs service
+        .task{
+            // Assemble the URL that points to the end point
+            let url = URL(string: "https://icanhazdadjoke.com/")!
+            
+            // Define the type of ddat we want from the end point
+            // Configure the request to the website
+            var request = URLRequest(url: url)
+            // Ask for JSON data
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            
+            //Start a session to interact or talk with the endpiont
+            let urlSession = URLSession.shared
+            
+            // Try to fetch a new joke
+            //but it might not work so we use a do-catch statment
+            
+            
+            do {
+               //Get the raw data from the endpiont
+                let (data, _) = try await urlSession.data(for: request)
+                
+                //Atemt to decode the raw data into a Swift strucher
+                //Take whats in data and puts it in currentJoke
+                //                                       |
+                //                                       V
+                //
+                currentJoke = try JSONDecoder().decode(DadJoke.self, from: data)
+                
+            } catch  {
+                print("could not retrieve or decode the JSON from endpoint")
+                // Print the contents of the "error" constant that the do-catch block populates
+                print(error)
+            }
+            
+        }
         .navigationTitle("icanhazdadjoke?")
         .padding()
     }
