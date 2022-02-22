@@ -13,6 +13,29 @@ struct ContentView: View {
                 )
                 .padding(10)
             
+            //heart.circle
+            //needs to turn red
+            //
+            Image(systemName: "heart.circle")
+                .resizable()
+                .frame(width: 40, height: 40)
+            
+            Button(action: {
+                print("button was pressed")
+            },label: {
+                Text("Another One!")
+            })
+                .buttonStyle(.bordered)
+          
+            HStack{
+                Text("Favourites")
+                    .font(.title)
+                    .bold()
+            }
+            Spacer()
+            
+            
+            
             List {
                 Text("Which side of the chicken has more feathers? The outside.")
                 Text("Why did the Clydesdale give the pony a glass of water? Because he was a little horse!")
